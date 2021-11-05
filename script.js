@@ -21,6 +21,8 @@ const getMovieGenres = async () => {
 getMovieGenres()
 
 const startFetchingData = () => {
+    const spinner = document.querySelector('.spinner')
+    spinner.className = 'd-none'
     for (let i = 0; i < genres.length; i++) {
         const getMovies = async () => {
             try {
@@ -43,8 +45,7 @@ const startFetchingData = () => {
 
 
 const displayMovies = (movies, i) => {
-    const spinner = document.querySelector('.spinner')
-    // spinner.className = 'd-none'
+   
     const moviesContainer = document.querySelector('.movies-container')
     moviesContainer.innerHTML += `
     <h4 class="pl-2"><strong>${genres[i].charAt(0).toUpperCase() + genres[i].substr(1)}</strong></h4>
