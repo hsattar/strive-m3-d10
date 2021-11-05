@@ -4,13 +4,18 @@ const movieGenre = new URLSearchParams(window.location.search).get('movieGenre')
 const url = `https://striveschool-api.herokuapp.com/api/movies/`
 
 const loadMovieData = async () => {
-    const response = await fetch(url + movieGenre, {
-        headers: {
-            "Authorization": myToken
-        }
-    })
-    const body = await response.json()
-    displaySelectedMovie(body)
+    try {
+        const response = await fetch(url + movieGenre, {
+            headers: {
+                "Authorization": myToken
+            }
+        })
+        if (!response.ok) throw new Error('Failed To Fetch')
+        const body = await response.json()
+        displaySelectedMovie(body)
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 loadMovieData()
@@ -26,7 +31,7 @@ const displaySelectedMovie = movies => {
         <h2>${name} - ${category.toUpperCase()}</h2>
         <p>${description}</p>
         <div class="d-flex justify-content-between">
-            <a href="../back-office/office.html?movieId=${id}" class="btn btn-outline-success">Edit</a>
+            <a href="../back-office/office.html?movieGenre=${category}&movieId=${id}" class="btn btn-outline-success">Edit</a>
             <button class="btn btn-outline-danger ml-3">Delete</button>
         </div>
     </div>
