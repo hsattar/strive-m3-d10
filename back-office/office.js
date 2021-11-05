@@ -59,7 +59,7 @@ const addMovie = async () => {
             alert.innerText = movieId ? `Successfully Edited The Movie Called ${newMovie.name}` 
             : `Successfully Created New Movie Called ${newMovie.name}`
             setTimeout(() => {
-                form.reset()
+                if (!movieId) form.reset()
                 alert.classList.add('d-none')
             }, 3000)
         }

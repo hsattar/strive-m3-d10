@@ -22,7 +22,6 @@ loadMovieData()
 
 const displaySelectedMovie = movies => {
     const chosenMovie = movies.filter(({_id: id}) => id === movieId)
-    console.log(chosenMovie)
     const movieImageContainer = document.querySelector('.movie-image-container')
     const infoContainer = document.querySelector('.container')
     movieImageContainer.innerHTML = `<img src=${chosenMovie[0].imageUrl} class="hero-cover">`
@@ -36,4 +35,25 @@ const displaySelectedMovie = movies => {
         </div>
     </div>
     `
-)}
+    )
+    const deleteBtn = document.querySelector('.btn-outline-danger')
+    deleteBtn.addEventListener('click', () => {
+        deleteMovie()
+    })
+}
+
+
+const deleteMovie = async () => {
+    try {
+        const response = await fetch(url + movieId, {
+            method: "DELETE",
+            headers: {
+                "Authorization": myToken
+            }
+        })
+        if (response.ok) window.location.href = '/'
+    } catch (error) {
+        console.error(error)
+    }
+}
+
