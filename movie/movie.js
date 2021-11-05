@@ -27,7 +27,7 @@ const displaySelectedMovie = movies => {
     movieImageContainer.innerHTML = `<img src=${chosenMovie[0].imageUrl} class="hero-cover">`
     infoContainer.innerHTML = chosenMovie.map(({name, category, description, _id: id}) => `
     <div class="row my-3">
-        <h2>${name} - ${category.toUpperCase()}</h2>
+        <h2>${name} - ${category.charAt(0).toUpperCase() + category.substr(1)}</h2>
         <p>${description}</p>
         <div class="d-flex justify-content-between">
             <a href="../back-office/office.html?movieGenre=${category}&movieId=${id}" class="btn btn-outline-success">Edit</a>

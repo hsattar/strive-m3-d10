@@ -43,9 +43,11 @@ const startFetchingData = () => {
 
 
 const displayMovies = (movies, i) => {
+    const spinner = document.querySelector('.spinner')
+    // spinner.className = 'd-none'
     const moviesContainer = document.querySelector('.movies-container')
     moviesContainer.innerHTML += `
-    <h4 class="pl-2"><strong>${genres[i].toUpperCase()}</strong></h4>
+    <h4 class="pl-2"><strong>${genres[i].charAt(0).toUpperCase() + genres[i].substr(1)}</strong></h4>
     <div class="row mx-n1 mb-4 movies${i} justify-content-center"></div>`
     const moviesGenre = document.querySelector(`.movies${i}`)
     moviesGenre.innerHTML = movies.map(({imageUrl: image, _id: id, category}) => `
