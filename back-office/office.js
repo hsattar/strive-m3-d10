@@ -16,12 +16,30 @@ const addMovie = async () => {
         imageUrl: document.getElementById('image').value
     }
 
-    const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(movie),
-        headers: {
-            "Content-Type": "application/JSON",
-            "Authorization": myToken
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(movie),
+            headers: {
+                "Content-Type": "application/JSON",
+                "Authorization": myToken
+            }
+        })
+
+        if (response.ok) {
+            const newMovie = await response.json()
+            const alert = document.querySelector('.alertMsg')
+            alert.className = 'alert alert-success'
+            alert.innerText = `Successfully Created New Movie Called ${newMovie.name
+            }`
+            setTimeout(() => {
+                form.reset()
+                alert.classList.add('d-none')
+            }, 3000)
         }
-    })
+        else throw new Error('Failed To Add Movie')
+
+    } catch (error) {
+        console.error(error)
+    }
 }
